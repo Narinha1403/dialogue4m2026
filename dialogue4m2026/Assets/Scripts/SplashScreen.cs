@@ -6,6 +6,6 @@ public class SplashScreen : MonoBehaviour
     IEnumerator Start()
     {
         yield return new WaitForSeconds(2f);
-        GameManager.Instance.LoadScene("MenuPrincipal");
+        GameManager.Instance.LoadMenu();
     }
 }

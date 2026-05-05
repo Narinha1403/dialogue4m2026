@@ -4,8 +4,7 @@ public class MainMenu : MonoBehaviour
 {
     public void StartGame()
     {
-        GameManager.Instance.ChangeState(GameManager.GameState.Gameplay);
-        GameManager.Instance.LoadScene("SampleScene");
+        GameManager.Instance.LoadGameplay();
     }
 
     public void QuitGame()
