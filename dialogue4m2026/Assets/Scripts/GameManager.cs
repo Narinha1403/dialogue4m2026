@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
@@ -59,6 +60,19 @@ public class GameManager : MonoBehaviour
     public void LoadGameplay()
     {
         SceneManager.LoadScene("SampleScene");
+
+        // Carrega a interface junto da gameplay
+        SceneManager.LoadScene("GUI", LoadSceneMode.Additive);
+
         ChangeState(GameState.Gameplay);
+    }
+
+    // =========================
+    // FECHAR JOGO
+    // =========================
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
