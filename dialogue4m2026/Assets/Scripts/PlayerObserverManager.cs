@@ -4,8 +4,8 @@ public static class PlayerObserverManager
 {
     public static event Action<int> OnCoinCollected;
 
-    public static void CollectCoin(int amount)
+    public static void NotifyCoinCollected(int totalCoins)
     {
-        OnCoinCollected?.Invoke(amount);
+        OnCoinCollected?.Invoke(totalCoins);
     }
 }

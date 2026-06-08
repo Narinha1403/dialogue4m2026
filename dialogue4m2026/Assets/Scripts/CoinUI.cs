@@ -3,9 +3,7 @@ using TMPro;
 
 public class CoinUI : MonoBehaviour
 {
-    public TextMeshProUGUI coinText;
-
-    private int coins = 0;
+    [SerializeField] private TextMeshProUGUI coinText;
 
     private void OnEnable()
     {
@@ -17,9 +15,10 @@ public class CoinUI : MonoBehaviour
         PlayerObserverManager.OnCoinCollected -= UpdateCoins;
     }
 
-    void UpdateCoins(int amount)
+    private void UpdateCoins(int totalCoins)
     {
-        coins += amount;
-        coinText.text = "Moedas: " + coins;
+        if (coinText == null) return;
+
+        coinText.text = "Moedas: " + totalCoins;
     }
 }
