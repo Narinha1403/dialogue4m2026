@@ -13,8 +13,23 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput = Vector2.zero;
     private Rigidbody rb;
 
-    // COINS (estado fica aqui)
     private int coins = 0;
+
+    private void OnEnable()
+    {
+        PlayerObserverManager.OnCoinCollected += HandleCoinCollected;
+    }
+
+    private void OnDisable()
+    {
+        PlayerObserverManager.OnCoinCollected -= HandleCoinCollected;
+    }
+
+    private void HandleCoinCollected()
+    {
+        coins++;
+        PlayerObserverManager.NotifyCoinCountChanged(coins);
+    }
 
     void Awake()
     {
@@ -39,6 +54,8 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyMovement()
     {
+        if (rb == null) return;
+
         Vector3 desired = new Vector3(moveInput.x, 0f, moveInput.y);
 
         if (cameraRelativeMovement && cameraTransform != null)
@@ -67,16 +84,12 @@ public class PlayerController : MonoBehaviour
             if (horizontalVel.magnitude > maxSpeed)
             {
                 Vector3 limited = horizontalVel.normalized * maxSpeed;
-                rb.linearVelocity = new Vector3(limited.x, rb.linearVelocity.y, limited.z);
+                rb.linearVelocity = new Vector3(
+                    limited.x,
+                    rb.linearVelocity.y,
+                    limited.z
+                );
             }
         }
     }
-
-    // COIN LOGIC
-    public void CollectCoin()
-    {
-        coins++;
-        PlayerObserverManager.NotifyCoinCollected(coins);
-    }
 }
-
